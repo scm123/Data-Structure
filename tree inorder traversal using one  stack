@@ -1,0 +1,21 @@
+//java implementation
+
+public static void inOrder(Node root) {
+         Stack<Node> s =new Stack<>();
+         s.push(root);
+         Node current=root;
+         
+         while(!s.isEmpty()){         
+             while(current !=null && current.left !=null ){                                           
+                 current=current.left;    
+                 s.push(current);       
+             }           
+           
+              Node p=s.pop();
+              System.out.print(p.data+" ");
+              current=p.right;
+             if( current !=null ) s.push(current);  
+              
+                 
+         }
+    }
