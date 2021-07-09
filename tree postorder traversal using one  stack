@@ -1,0 +1,35 @@
+//java implementation
+
+
+
+public static void postOrder(Node root) {
+            if (root ==null) return;
+            //left right root
+            Stack<Node> s =new Stack<>();
+            Node current=root;
+            Node prev=null;
+            do{
+                 //1. push all left child
+                 while(current!=null){
+                     s.push(current);
+                     prev=current;
+                     current=current.left;
+                 }
+                //2. move to the right node
+                 current=prev.right;
+               //3.if current node is null the pop until popped node is right of top  
+                while( !s.isEmpty() && current==null){
+                     prev=current;
+                     Node popped=null;
+                     while( !s.isEmpty() &&  s.peek().right==prev ){
+                        popped=s.pop();
+                        prev=popped;
+                        System.out.print(popped.data+" ");
+                     }
+                    
+                    if( !s.isEmpty()) current=s.peek().right;
+                }
+                 
+            }while(!s.isEmpty());
+                
+    }
