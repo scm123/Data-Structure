@@ -1,0 +1,18 @@
+//java
+---preOrder traversal 
+
+  public static void preOrder(Node root) {
+        if(root==null) return;
+        Node current =root;
+        Stack<Node> s=new Stack<>();
+        //Root left right
+        s.push(root);
+        while(!s.isEmpty()){
+            current=s.pop();
+            System.out.print(current.data+" ");
+            if(current.right!=null)
+             s.push(current.right);
+            if(current.left!=null)
+             s.push(current.left); 
+        }
+    }
