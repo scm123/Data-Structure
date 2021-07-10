@@ -1,5 +1,5 @@
 
-//1. printing in a line
+##1. printing in a line
 
 
  public static void levelOrder(Node root) {
@@ -16,7 +16,7 @@
       
     }
     
-    //2. print level in a separate line
+    ##2. print level in a separate line
     /* 
       For each level insert null in queue node .while poll when you get the null node it means current level is get over So insert a null node to the queue
     */
@@ -39,6 +39,93 @@
           }
           
       }
-      
-      
+           
+    }
+    
+    
+    ##3. print level in a separate line without inserting null
+    
+    static void levelOrder(Node root)
+    {
+        // Base Case
+        if(root == null)
+            return;
+         
+        // Create an empty queue for level order traversal
+        Queue<Node> q =new LinkedList<Node>();
+         
+        // Enqueue Root and initialize height
+        q.add(root);
+         
+         
+        while(true)
+        {
+             
+            // nodeCount (queue size) indicates number of nodes
+            // at current level.
+            int nodeCount = q.size();
+            if(nodeCount == 0)
+                break;
+             
+            // Dequeue all nodes of current level and Enqueue all
+            // nodes of next level
+            while(nodeCount > 0)
+            {
+                Node node = q.peek();
+                System.out.print(node.data + " ");
+                q.remove();
+                if(node.left != null)
+                    q.add(node.left);
+                if(node.right != null)
+                    q.add(node.right);
+                nodeCount--;
+            }
+            System.out.println();
+        }
+    }
+    
+    
+    ##4.  return 2D ArrayList of level order traversal
+    
+   static ArrayList<ArrayList<Integer>> levelOrder(Node root) 
+    {
+        // Your code here
+        if(root==null) return null;
+        ArrayList<ArrayList<Integer>>  al = new ArrayList<ArrayList<Integer>>();
+        
+        ArrayList<Integer> cl=new ArrayList<Integer>();
+         
+         //start
+         
+         Queue<Node> q= new LinkedList<>();
+         q.add(root);
+         
+        while(true)
+        {
+             
+            // nodeCount (queue size) indicates number of nodes
+            // at current level.
+            int nodeCount = q.size();
+            if(nodeCount == 0)
+                break;
+             
+            // Dequeue all nodes of current level and Enqueue all
+            // nodes of next level
+            while(nodeCount > 0)
+            {
+                Node node = q.peek();
+                //System.out.print(node.data + " ");
+                q.remove();
+                 cl.add(node.data);
+                if(node.left != null)
+                    q.add(node.left);
+                if(node.right != null)
+                    q.add(node.right);
+                nodeCount--;
+            }
+            al.add(cl);
+            cl=new ArrayList<Integer>();
+        }
+         //end
+         return al;
     }
