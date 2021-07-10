@@ -27,7 +27,7 @@ public static void topView(Node root) {
               pair<Node,Integer> p=q.poll();
               
               if(!map.containsKey(p.vh) ) map.put(p.vh,p.node);
-              toal_nodes_at_current_level--;
+              
               if(p.node.left!=null) q.add(new pair(p.node.left,p.vh-1));
               if(p.node.right!=null) q.add(new pair(p.node.right,p.vh+1));
 
