@@ -1,1 +1,41 @@
+##1.  Make a local class inside method to store Node,Vertical_height pair,
+  2.  Use itrative Level order traversal using one stack
+  3.  To print top view in a order use treemap that will store the nodes in the order of vertical height
+  
+  
+    
 
+public static void topView(Node root) {
+      if(root==null) return ;
+      
+    class pair<T,Q> {
+            T node;
+            Q vh; 
+            public pair(T A,Q B)  {
+                node=A;
+                vh=B;
+            }
+     }
+  
+      Queue<pair> q=new LinkedList<>();
+    
+      q.add(new pair(root,0));
+      
+      Map<Integer,Node> map=new TreeMap<>();
+      map.put(0,root);
+      while(!q.isEmpty()){
+          int toal_nodes_at_current_level=q.size();
+          
+          while(toal_nodes_at_current_level>0){
+              pair<Node,Integer> p=q.poll();
+              
+              if(!map.containsKey(p.vh) ) map.put(p.vh,p.node);
+              toal_nodes_at_current_level--;
+              if(p.node.left!=null) q.add(new pair(p.node.left,p.vh-1));
+              if(p.node.right!=null) q.add(new pair(p.node.right,p.vh+1));
+             
+          }
+      }
+      for(Map.Entry<Integer,Node> e: map.entrySet())
+       System.out.print(e.getValue().data+" ");
+    }
