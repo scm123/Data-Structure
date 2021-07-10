@@ -1,1 +1,55 @@
 
+ ##1. iterative Time : O(n),Space : O(n)
+    
+    static void levelOrder(Node root)
+    {
+        // Base Case
+        if(root == null)
+            return;
+         
+        // Create an empty queue for level order traversal
+        Queue<Node> q =new LinkedList<Node>();
+         
+        // Enqueue Root and initialize height
+        q.add(root);
+        int h=0; 
+         
+        while(true)
+        {
+             
+            // nodeCount (queue size) indicates number of nodes
+            // at current level.
+            int nodeCount = q.size();
+            if(nodeCount == 0)
+                break;
+             
+            // Dequeue all nodes of current level and Enqueue all
+            // nodes of next level
+            while(nodeCount > 0)
+            {
+                Node node = q.peek();
+                
+                q.remove();
+                if(node.left != null)
+                    q.add(node.left);
+                if(node.right != null)
+                    q.add(node.right);
+                nodeCount--;
+            }
+            h++;
+        }
+        System.out.print(h );
+    }
+    
+    
+     ##1. recursive Time : O(n)
+     
+       public static int height(Node root){
+        if(root==null) return 0;
+          int lh=height( root.left);
+          int rh=height( root.right);
+          
+          return Math.max(lh,rh)+1;
+    }
+     
+     
