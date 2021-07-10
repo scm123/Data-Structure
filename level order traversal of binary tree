@@ -1,1 +1,44 @@
 
+//1. printing in a line
+
+
+ public static void levelOrder(Node root) {
+      if(root==null) return;
+      Queue<Node> q= new LinkedList<>();
+      q.add(root);
+      while(!q.isEmpty()){
+          Node head=q.poll();
+          System.out.print(head.data+" ");
+          
+          if(head.left!=null) q.add(head.left);
+          if(head.right!=null) q.add(head.right);
+          }     
+      
+    }
+    
+    //2. print level in a separate line
+    /* 
+      For each level insert null in queue node .while poll when you get the null node it means current level is get over So insert a null node to the queue
+    */
+    
+    public static void levelOrder1(Node root) {
+      if(root==null) return;
+      Queue<Node> q= new LinkedList<>();
+      q.add(root);q.add(null);
+      while(!q.isEmpty()){
+          Node head=q.poll();
+          if(head==null){
+              q.add(null);
+              System.out.println();
+          }
+          else{
+              System.out.print(head.data+" ");
+          
+              if(head.left!=null) q.add(head.left);
+              if(head.right!=null) q.add(head.right);
+          }
+          
+      }
+      
+      
+    }
