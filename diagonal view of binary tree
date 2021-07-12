@@ -1,1 +1,149 @@
+###1.
 
+ public ArrayList<Integer> diagonal(TreeNode root)
+      {
+           //add your code here.
+            class pair {
+               public TreeNode node;
+               public int hd;
+               public pair(TreeNode node,int hd){
+                    this.node=node;
+                    this.hd=hd;
+               }
+           }
+           
+           ArrayList<Integer> al= new ArrayList<>();
+           if(root==null) return al;
+           
+           
+           Queue<pair> q=new LinkedList<>();
+           Map<Integer,ArrayList<Integer>> map=new TreeMap<>();
+           
+           q.add(new pair(root,0));
+           
+           while(!q.isEmpty()){
+               
+               int n=q.size();
+               for(int i=0; i<n ;i++){
+                   pair p=q.poll();
+                   ArrayList<Integer> aa=null;
+                   if(!map.containsKey(p.hd)){
+                       aa=new ArrayList<>();
+                   }
+                   else{
+                         aa=map.get(p.hd);
+                   }  
+                   aa.add(p.node.data); 
+                   map.put(p.hd,aa);
+                   
+                   if(p.node.left!=null) q.add(new pair(p.node.left,p.hd+1));
+                   if(p.node.right!=null) q.add(new pair(p.node.right,p.hd));
+               }
+               
+               
+           }
+           for(Map.Entry<Integer,ArrayList<Integer>> entry: map.entrySet())
+           {
+               al.addAll(map.getValue());
+           }
+           return al;
+      }
+      
+      
+###2.
+
+ public void diagonalPrint(TreeNode root)
+      {
+           //add your code here.
+    HashMap<Integer,ArrayList<Integer>> map=new HashMap<>();
+		this.diagonalview(map,root,0);
+		Set<Integer> set=map.keySet();
+		for(int i:set)
+		{
+			ArrayList<Integer> list=map.get(i);
+			for(int j=0;j<list.size();j++)
+			{
+				System.out.print(list.get(j)+" ");
+			}
+		}
+      }
+      
+       private void diagonalview(HashMap<Integer,ArrayList<Integer>> map,TreeNode node,int level)
+	{
+		if(node==null)
+		{
+			return ;
+		}
+		if(map.containsKey(level))
+		{
+			ArrayList<Integer> list=map.get(level);
+			list.add(node.data);
+			map.put(level, list);
+		}
+		else
+		{
+			ArrayList<Integer> list=new ArrayList<>();
+			list.add(node.data);
+			map.put(level, list);
+		}
+		this.diagonalview(map,node.left,level+1);
+		this.diagonalview(map,node.right,level);
+		return ;
+	}
+  
+  
+  ###3.
+
+
+
+public static void diagonalPrint(Node root)
+{
+	if (root == null)
+	{
+		return;
+	}
+	TreeMap<Integer,
+	List<Integer>> map = new TreeMap<Integer,
+								List<Integer>>();
+	
+	Queue<TNode> q = new LinkedList<TNode>();
+	
+	q.add(new TNode(root, 0));
+	
+	while (!q.isEmpty())
+	{
+		TNode curr = q.poll();
+		map.putIfAbsent(curr.level, new ArrayList<>());
+		map.get(curr.level).add(curr.node.data);
+		
+		if (curr.node.left != null)
+		{
+			q.add(new TNode(curr.node.left,
+							curr.level + 1));
+		}
+		if (curr.node.right != null)
+		{
+			q.add(new TNode(curr.node.right,
+							curr.level));
+		}
+	}
+	
+	for(Map.Entry<Integer, List<Integer>>
+		entry : map.entrySet())
+	{
+		int k = entry.getKey();
+		
+		List<Integer> l = map.get(k);
+		int size = l.size();
+		
+		for(int i = 0; i < l.size(); i++)
+		{
+			System.out.print(l.get(i));
+			System.out.print(" ");
+		}
+		System.out.println("");
+	}
+	return;
+}
+
+}
