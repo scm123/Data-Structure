@@ -1,4 +1,4 @@
- ##1.
+ ##1. iterative
  
  public static ArrayList<Integer> Ancestors(Node root, int target)
     {
@@ -31,5 +31,26 @@
                 al.add(current.data);
             }
         }
+        return al;
+    }
+    
+    
+    ###2. recursive
+    
+    public static boolean allAncestors(ArrayList<Integer> al,Node root, int target){
+        if(root==null) return false;
+        if(root.data==target) return true;
+        if(allAncestors(al,root.left,target)||allAncestors(al,root.right,target)){
+            al.add(root.data);
+            return true;
+        }
+        return false;
+    }
+    public static ArrayList<Integer> Ancestors(Node root, int target)
+    {
+        ArrayList<Integer> al=new ArrayList<Integer>();
+        if(root==null) return al;
+        
+        allAncestors(al,root,target);
         return al;
     }
