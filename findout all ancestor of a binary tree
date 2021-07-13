@@ -1,0 +1,35 @@
+ ##1.
+ 
+ public static ArrayList<Integer> Ancestors(Node root, int target)
+    {
+        // add your code here
+        
+        ArrayList<Integer> al=new ArrayList<Integer>();
+        if(root==null) return al;
+        Queue<Node> q=new LinkedList<>();
+        Stack<Node> s=new Stack<>();
+        boolean flag=false;
+        Node prev=null;
+        q.add(root);
+        while(!q.isEmpty()){
+            int n= q.size();
+            for(int i=0; i<n ;i++){
+                Node p=q.poll();
+                if(p.data == target){flag=true; prev=p; break;}
+                s.push(p);
+                if(p.left!=null) q.add(p.left);
+                if(p.right!=null) q.add(p.right);
+            }
+            if(flag) break;
+        }
+        q.clear();
+        
+        while(!s.isEmpty()){
+            Node current=s.pop();
+            if(current.left==prev ||current.right==prev){
+                prev=current;
+                al.add(current.data);
+            }
+        }
+        return al;
+    }
