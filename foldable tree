@@ -1,0 +1,15 @@
+    boolean IsFoldable(Node node) 
+	{ 
+		// your code 
+		if(node==null) return true;
+		
+	   return	isMirrorImage(node.left,node.right);
+	   	
+	} 
+	
+	boolean isMirrorImage(Node root,Node root1){
+	    if(root==null && root1==null ) return true;
+	    if(root==null || root1==null ) return false;
+	    
+	    return  isMirrorImage(root.left,root1.right) && isMirrorImage(root.right,root1.left); 
+	}
