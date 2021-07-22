@@ -1,0 +1,28 @@
+##1.
+
+class Solution
+{
+    static int pIndex=0;
+    public static Node buildTree(int inorder[], int preorder[], int n)
+    {
+        pIndex=0;
+        return utilbuildTree(inorder,preorder,0,n-1);
+    }
+    public static Node utilbuildTree(int in[],int pre[],int s,int e)
+    {
+        if(s>e)return null;
+        Node root=new Node(pre[pIndex++]);
+        int ind=-1;
+        for(int i=s;i<=e;i++){
+            if(in[i]==root.data){
+                ind=i;
+                break;
+            }
+        }
+        root.left=utilbuildTree(in,pre,s,ind-1);
+        root.right=utilbuildTree(in,pre,ind+1,e);
+        return root;
+    }
+}
+
+    
