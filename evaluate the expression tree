@@ -1,0 +1,40 @@
+###1.
+
+
+class Solution {
+    public boolean isOperand(char ch){
+        
+        switch(ch){
+            case '+':case '-':case '*':case '/':
+                return false;
+        }
+        return true;
+    }
+    
+    public int calcA(char ch,int a,int b){
+        switch(ch){
+            case '+':
+                 return a+b;
+            case '-':
+                 return a-b;
+             case '*':
+                  return a*b;
+             case '/':
+                  return a/b;
+        }
+        return 0;
+    }
+    
+    public int evalTree(Node root) {
+        // Your code here.
+        if (root==null) return 0;
+        if(isOperand((root.data).charAt(0)) ) {
+         return Integer.parseInt(root.data);
+        }
+        else{
+            int l= evalTree( root.left);
+            int r= evalTree( root.right);
+            return calcA( (root.data).charAt(0),l,r);
+        }
+    }
+}
