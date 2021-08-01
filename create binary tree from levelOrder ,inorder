@@ -1,0 +1,34 @@
+class GfG
+{
+    Node buildTree(int inord[], int level[])
+    {
+        //your code here
+       if(inord.length==0)    return null;
+       return util(inord,level,0,level.length -1);
+    }
+    Node util(int inord[], int level[],int s,int e)
+    {
+        //your code here
+       if(s>e) return null;
+       boolean flag=false;
+       Node root=null; 
+       int i=0;
+       if (s == e)
+            return new Node(inord[s]);
+            
+       for(int j=0; j<level.length ; j++) {
+           for( i=s ;i<e ; i++){
+                if(inord[i]==level[j]){
+                    flag=true; 
+                    root=new Node(inord[i]);
+                    break;
+                }
+           }if(flag) break;
+        }  
+         
+        root.left=util(inord,level,s,i-1);
+        root.right=util(inord,level,i+1,e);
+        return root;
+    }
+   
+}
